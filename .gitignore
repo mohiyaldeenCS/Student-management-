@@ -1,0 +1,13 @@
+.vs/
+**/x64/
+**/Debug/
+**/Release/
+*.user
+*.suo
+*.pdb
+*.obj
+*.ilk
+*.tlog
+Student Information.txt
+Temp file.txt
+
