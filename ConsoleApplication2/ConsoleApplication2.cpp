@@ -966,7 +966,6 @@ void searchByLastName( )
     Students student;
     fstream student_Info;
     student_Info.open(FILE_NAME, ios::in);
-    int id;
     string last_name;
 D:
     cout << "Enter the first name of the student whose data you want to search it . : ";

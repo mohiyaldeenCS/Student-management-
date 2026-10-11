@@ -10,12 +10,26 @@ string password;
 string user_name;
 string ReadPassword();
 
+string ReadEnvironmentVariable(const char* name)
+{
+    char* value = nullptr;
+    size_t length = 0;
+    if (_dupenv_s(&value, &length, name) != 0 || value == nullptr)
+    {
+        free(value);
+        return "";
+    }
+
+    string result(value);
+    free(value);
+    return result;
+}
+
 void getUserName()
 {
-    const char* configuredUserName = std::getenv("STUDENT_ADMIN_USERNAME");
-    const char* configuredPassword = std::getenv("STUDENT_ADMIN_PASSWORD");
-    if (configuredUserName == nullptr || configuredPassword == nullptr ||
-        configuredUserName[0] == '\0' || configuredPassword[0] == '\0')
+    const string configuredUserName = ReadEnvironmentVariable("STUDENT_ADMIN_USERNAME");
+    const string configuredPassword = ReadEnvironmentVariable("STUDENT_ADMIN_PASSWORD");
+    if (configuredUserName.empty() || configuredPassword.empty())
     {
         cerr << "Set STUDENT_ADMIN_USERNAME and STUDENT_ADMIN_PASSWORD before starting the application.\n";
         exit(1);
